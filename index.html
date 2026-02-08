@@ -4,41 +4,134 @@
   <meta charset="UTF-8">
   <title>Para ti</title>
 
+  <!-- tipografía romántica -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background:
+        radial-gradient(circle at 20% 20%, #ffd1dc, transparent 40%),
+        radial-gradient(circle at 80% 30%, #ffb6c1, transparent 45%),
+        radial-gradient(circle at 50% 80%, #fbc2eb, transparent 50%),
+        linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
     }
 
+    /* corazones flotantes */
+    .heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.35);
+      transform: rotate(45deg);
+      animation: float 7s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: inherit;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -9px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -9px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -10%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.7;
+      }
+      100% {
+        bottom: 110%;
+        opacity: 0;
+      }
+    }
+
+    /* tarjeta central */
     .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 50px 60px;
+      border-radius: 35px;
       text-align: center;
-      max-width: 400px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 420px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+      }
+      to {
+        box-shadow: 0 0 90px rgba(255, 105, 180, 0.9);
+      }
     }
 
     h1 {
-      color: #ff5e78;
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: #b23a48;
+      margin: 0;
+    }
+
+    .heart-symbol {
+      font-size: 28px;
+      color: #c2185b;
+      margin: 10px 0 20px;
     }
 
     p {
-      font-size: 18px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      color: #5a1a2c;
+      line-height: 1.6;
+      margin: 0;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- corazones del fondo -->
+  <script>
+    for (let i = 0; i < 45; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 6 + "s";
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- tarjeta -->
   <div class="card">
-    <h1>Para ti 🩷</h1>
-    <p>Hice esto con cariño, solo para ti.</p>
-    <p>Te amo 🩷😭</p>
+    <h1>Para ti</h1>
+    <div class="heart-symbol">♥</div>
+    <p>
+      Hice esto con cariño, solo para ti.<br><br>
+      Te amo.
+    </p>
   </div>
+
 </body>
 </html>
